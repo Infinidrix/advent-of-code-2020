@@ -4,19 +4,19 @@ import java.nio.file.Path
 import java.util.*
 import kotlin.collections.HashMap
 
-fun main(args: Array<String>){
+fun main(args: Array<String>) {
     var filename = "input1.txt"
-    if (args.isNotEmpty()){
+    if (args.isNotEmpty()) {
         filename = args[0]
     }
     val graph = parseFile(filename)
     val dp = mutableMapOf<String, Boolean>()
-    for (node in graph.keys){
+    for (node in graph.keys) {
         val queue = ArrayDeque<String>()
         queue.add(node)
-        while (queue.isNotEmpty()){
+        while (queue.isNotEmpty()) {
             val currNode = queue.removeFirst()
-            if ((currNode in dp.keys && dp[currNode] == true) || currNode == "shiny gold"){
+            if ((currNode in dp.keys && dp[currNode] == true) || currNode == "shiny gold") {
                 dp[node] = true
                 break
             }
@@ -35,11 +35,11 @@ fun parseFile(filename: String): HashMap<String, Array<String>> {
         val line = it.split(" bags contain ")
         val result = arrayListOf<String>()
         val values = line[1].split(", ")
-        for (value in values){
+        for (value in values) {
             var curr = value.split(" bag")[0]
             if (curr == "no other") continue
             val temp = curr.split(" ")
-            if (temp[0].toIntOrNull() != null){
+            if (temp[0].toIntOrNull() != null) {
                 curr = temp.slice(1 until temp.size).joinToString(" ")
             }
             result.add(curr)

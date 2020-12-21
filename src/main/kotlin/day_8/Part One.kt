@@ -11,10 +11,10 @@ fun main(args: Array<String>) {
     val visitedArray = Array(instructionSet.size) { false }
     var lineNumber = 0
     var count = 0
-    while (!visitedArray[lineNumber]){
+    while (!visitedArray[lineNumber]) {
         val currInstruction = instructionSet[lineNumber]
         visitedArray[lineNumber] = true
-        when (currInstruction.first){
+        when (currInstruction.first) {
             "acc" -> {
                 count += currInstruction.second
                 lineNumber++
@@ -32,7 +32,7 @@ fun parseFile(filename: String): Array<Pair<String, Int>> {
     val path = Path.of("src", "main", "kotlin", "day_8", filename).toAbsolutePath()
     path.toFile().bufferedReader().lines().forEach {
         val line = it.split(" ").toTypedArray()
-        if (line[1][0] == '+'){
+        if (line[1][0] == '+') {
             line[1] = line[1].substring(1)
         }
         output.add(Pair(line[0], line[1].toInt()))

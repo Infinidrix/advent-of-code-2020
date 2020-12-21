@@ -2,9 +2,9 @@ package day_6
 
 import java.nio.file.Path
 
-fun main(args: Array<String>){
+fun main(args: Array<String>) {
     var filename = "input1.txt"
-    if (args.isNotEmpty()){
+    if (args.isNotEmpty()) {
         filename = args[0]
     }
 
@@ -21,12 +21,12 @@ fun parseFileWithSet(filename: String): Int {
         if (line.isEmpty() || line.isBlank()) {
             output += temp.size
             first = true; temp = mutableSetOf()
-        } else if (first){
+        } else if (first) {
             temp.addAll(line.toSet())
             first = false
-        }else{
+        } else {
             val tempSet = line.toSet()
-            temp.removeIf {!tempSet.contains(it)}
+            temp.removeIf { !tempSet.contains(it) }
         }
     }
     return output

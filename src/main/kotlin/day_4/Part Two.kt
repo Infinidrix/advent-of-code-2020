@@ -1,16 +1,15 @@
 package day_4
 
 import java.nio.file.Path
-import kotlin.collections.HashMap
 
-fun main(args: Array<String>){
+fun main(args: Array<String>) {
     var filename = "input1.txt"
-    if (args.isNotEmpty()){
+    if (args.isNotEmpty()) {
         filename = args[0]
     }
     val passportSheet = parseFileWithInfo(filename)
     var count = 0
-    for (passport in passportSheet){
+    for (passport in passportSheet) {
         var isValid = true
         isValid = isValid && checkBirthday(passport)
         isValid = isValid && checkIssueDate(passport)
@@ -27,7 +26,7 @@ fun main(args: Array<String>){
 fun checkId(passport: java.util.HashMap<String, String>): Boolean {
     val id = passport["pid"] ?: return false
     if (id.length != 9) return false
-    for (char in id){
+    for (char in id) {
         if (!char.isDigit()) return false
     }
     return true
@@ -46,20 +45,20 @@ fun checkHair(passport: HashMap<String, String>): Boolean {
     var count = 0
     val validChars = arrayOf('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f')
 
-    for (char in hair.substring(1)){
+    for (char in hair.substring(1)) {
         if (char !in validChars) return false
         count++
     }
-    if (count != 6){
+    if (count != 6) {
         return false
     }
     return true
 }
 
-fun checkHeight(passport: HashMap<String, String>): Boolean{
+fun checkHeight(passport: HashMap<String, String>): Boolean {
     val height = passport["hgt"] ?: return false
     val length = height.length
-    if (length < 3){
+    if (length < 3) {
         return false
     }
     val acceptableSuffix = HashMap<String, IntRange>()
@@ -68,68 +67,67 @@ fun checkHeight(passport: HashMap<String, String>): Boolean{
     val units = height.substring(length - 2)
     val value = height.substring(0, length - 2).toIntOrNull() ?: return false
     val acceptableRange = acceptableSuffix[units] ?: return false
-    if (value !in acceptableRange){
+    if (value !in acceptableRange) {
         return false
     }
     return true
 }
 
-fun checkExpYear(passport: HashMap<String, String>): Boolean{
-    if (!passport.containsKey("eyr")){
+fun checkExpYear(passport: HashMap<String, String>): Boolean {
+    if (!passport.containsKey("eyr")) {
         return false
     }
     val expYear = passport["eyr"]
-    if (expYear!!.length != 4){
+    if (expYear!!.length != 4) {
         return false
     }
     val expYearInt = expYear.toIntOrNull() ?: return false
-    if (expYearInt !in 2020..2030){
+    if (expYearInt !in 2020..2030) {
         return false
     }
     return true
 }
 
 fun checkIssueDate(passport: HashMap<String, String>): Boolean {
-    if (!passport.containsKey("iyr")){
+    if (!passport.containsKey("iyr")) {
         return false
     }
     val issueYear = passport["iyr"]
-    if (issueYear!!.length != 4){
+    if (issueYear!!.length != 4) {
         return false
     }
     val issueYearInt = issueYear.toIntOrNull() ?: return false
-    if (issueYearInt !in 2010..2020){
+    if (issueYearInt !in 2010..2020) {
         return false
     }
     return true
 }
 
-fun checkBirthday(passport: HashMap<String, String>): Boolean{
-    if (!passport.containsKey("byr")){
+fun checkBirthday(passport: HashMap<String, String>): Boolean {
+    if (!passport.containsKey("byr")) {
         return false
     }
     val birthYear = passport["byr"]
-    if (birthYear!!.length != 4){
+    if (birthYear!!.length != 4) {
         return false
     }
     val birthYearInt = birthYear.toIntOrNull() ?: return false
-    if (birthYearInt !in 1920 until 2003){
+    if (birthYearInt !in 1920 until 2003) {
         return false
     }
     return true
 }
 
-fun parseFileWithInfo(filename: String): List<HashMap<String, String>>{
+fun parseFileWithInfo(filename: String): List<HashMap<String, String>> {
     val output = mutableListOf<HashMap<String, String>>()
     val path = Path.of("src", "main", "kotlin", "day_4", filename).toAbsolutePath()
     path.toFile().bufferedReader().useLines {
         var passportInfo = HashMap<String, String>()
         it.forEach { line ->
-            if (line.isBlank()){
+            if (line.isBlank()) {
                 output.add(passportInfo)
                 passportInfo = HashMap()
-            }
-            else {
+            } else {
                 line.split(" ").forEach { property ->
                     val pair = property.split(":")
                     passportInfo[pair[0]] = pair[1]

@@ -1,17 +1,17 @@
 package day_1
 
-fun main(args: Array<String>){
+fun main(args: Array<String>) {
     var filename = "input2.txt"
-    if (args.isNotEmpty()){
+    if (args.isNotEmpty()) {
         filename = args[0]
     }
     val input: List<Int> = parseFile(filename)
     val indexMap = createTwoNumMap(input)
-    for (i in input.indices){
+    for (i in input.indices) {
         val num = input[i]
-        if (indexMap.containsKey(2020 - num)){
+        if (indexMap.containsKey(2020 - num)) {
             indexMap[2020 - num]!!.forEach {
-                if (!it.contains(i)){
+                if (!it.contains(i)) {
                     println("Found $num, ${input[it[1]]} and ${input[it[0]]} " +
                             "with product ${num * input[it[1]] * input[it[0]]}")
                 }
@@ -20,9 +20,9 @@ fun main(args: Array<String>){
     }
 }
 
-fun createTwoNumMap(input: List<Int>): HashMap<Int, MutableList<Array<Int>>>{
+fun createTwoNumMap(input: List<Int>): HashMap<Int, MutableList<Array<Int>>> {
     val indexHolder = hashMapOf<Int, MutableList<Array<Int>>>()
-    for (i in input.indices){
+    for (i in input.indices) {
         val num = input[i]
         for (j in i until input.size) {
             val num2 = input[j]

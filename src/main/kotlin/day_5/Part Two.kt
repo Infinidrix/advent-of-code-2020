@@ -1,12 +1,11 @@
 package day_5
 
 import java.util.*
-import java.util.concurrent.atomic.AtomicInteger
 import java.util.stream.Stream
 
-fun main(args: Array<String>){
+fun main(args: Array<String>) {
     var filename = "input1.txt"
-    if (args.isNotEmpty()){
+    if (args.isNotEmpty()) {
         filename = args[0]
     }
     val allIds = mutableListOf<Int>()
@@ -20,8 +19,8 @@ fun main(args: Array<String>){
         allIds.add(seatId)
     }
     allIds.sort()
-    for (ind in 1 until allIds.size){
-        if (allIds[ind] - allIds[ind - 1] == 2){
+    for (ind in 1 until allIds.size) {
+        if (allIds[ind] - allIds[ind - 1] == 2) {
             println("It seems like my ID is ${allIds[ind] - 1}")
         }
     }

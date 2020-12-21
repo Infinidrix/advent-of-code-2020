@@ -8,22 +8,22 @@ fun main(args: Array<String>) {
     val numbers = parseFile(filename)
     val hashedNumbers = hashMapOf<Long, Int>()
 
-    for (i in 0 until 25){
+    for (i in 0 until 25) {
         val value = numbers[i]
         hashedNumbers[value] = hashedNumbers[value]?.plus(1) ?: 1
     }
 
-    for (index in 25 until numbers.size){
+    for (index in 25 until numbers.size) {
         val value = numbers[index]
         var fulfillsCondition = false
-        for (secondIndex in index - 25 until index){
+        for (secondIndex in index - 25 until index) {
             val diff = value - numbers[secondIndex]
             if ((diff in hashedNumbers.keys && diff != numbers[secondIndex]) ||
-                    (diff in hashedNumbers.keys && hashedNumbers[diff]!! > 1)){
+                    (diff in hashedNumbers.keys && hashedNumbers[diff]!! > 1)) {
                 fulfillsCondition = true
             }
         }
-        if (!fulfillsCondition){
+        if (!fulfillsCondition) {
             println("$value doesn't comply with the sum rule")
         }
         hashedNumbers[numbers[index - 25]] = hashedNumbers[numbers[index - 25]]!!.minus(1)

@@ -3,16 +3,16 @@ package day_10
 import java.nio.file.Path
 
 
-fun main(args: Array<String>){
+fun main(args: Array<String>) {
     val filename = if (args.isNotEmpty()) args[0] else "input1.txt"
 
     val adapters = parseFile(filename).toSet()
     val countArray = Array(3) { 0 }
     var countConnected = 0
     var jolts = 0
-    while (countConnected < adapters.size){
-        for (i in 1..3){
-            if (jolts + i in adapters){
+    while (countConnected < adapters.size) {
+        for (i in 1..3) {
+            if (jolts + i in adapters) {
                 countArray[i - 1]++
                 jolts += i
                 countConnected++
@@ -25,6 +25,7 @@ fun main(args: Array<String>){
             "making the product ${countArray[0] * countArray[2]}")
 
 }
+
 fun parseFile(filename: String): Array<Int> {
     val output = arrayListOf<Int>()
 
