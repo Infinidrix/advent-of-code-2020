@@ -10,12 +10,12 @@ fun main(args: Array<String>) {
     val allSlopes = arrayOf(arrayOf(1, 1), arrayOf(3, 1), arrayOf(5, 1), arrayOf(7, 1), arrayOf(1, 2))
     var total = 1
     for (slope in allSlopes) {
-        total *= find_crashes(terrain, slope[0], slope[1])
+        total *= findCrashes(terrain, slope[0], slope[1])
     }
     println("Multiplication of all crashes is $total")
 }
 
-fun find_crashes(terrain: List<String>, right: Int, down: Int): Int {
+fun findCrashes(terrain: List<String>, right: Int, down: Int): Int {
     var crashes = 0
     var ind = 0
     var rightInd = 0
